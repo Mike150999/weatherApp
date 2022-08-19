@@ -1,11 +1,11 @@
 import React from 'react';
-import { Alert } from 'react-native';
+import { Alert} from 'react-native';
 import * as Location from 'expo-location';
-import Loading from './components/Loading';
-import Weather from './components/Weather';
+import Loading from './Loading';
+import Weather from './Weather';
 import axios from 'axios';
 
-const API_KEY = '54ef3ab1d20919cb82d4d4ae70737964';
+const _API_KEY = '54ef3ab1d20919cb82d4d4ae70737964';
 
 
 export default class extends React.Component {
@@ -15,7 +15,7 @@ export default class extends React.Component {
 	}
 
 	getWeather = async (latitude, longitude) => {
-		const {data: {main: {temp, feels_like}, weather, name}} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`);
+		const {data: {main: {temp, feels_like}, weather, name}} = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${_API_KEY}&units=metric`);
 		
 		this.setState({
 			isLoading: false, 
@@ -46,7 +46,10 @@ export default class extends React.Component {
 
 	const {isLoading, temp, condition, name, feelsLike} = this.state;
 	return (
-		isLoading ? <Loading/> : <Weather  temp={Math.round(temp)} name={name} feelsLike={Math.round(feelsLike)} condition={condition}/>
+		isLoading ? <Loading/> : <Weather  temp={Math.round(temp)}
+		 name={name} 
+		 feelsLike={Math.round(feelsLike)}
+		 condition={condition}/>
 		);
   }
 }
